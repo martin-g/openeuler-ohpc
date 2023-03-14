@@ -203,7 +203,7 @@ image and to provide boot capability for %{_arch} architecture.
 Summary: Warewulf - System provisioning server
 Requires: %{name} = %{version}-%{release}
 Requires: %{name}-server-ipxe-%{_arch} = %{version}-%{release}
-Requires: %{httpsvc}, perl(Apache), %{tftpsvc}, %{dhcpsrv}
+Requires: mod_perl, %{httpsvc}, %{tftpsvc}, %{dhcpsrv}, python3-policycoreutils
 
 %if 0%{?rhel} >= 8 || 0%{?openEuler}
 Requires(post): policycoreutils-python-utils
