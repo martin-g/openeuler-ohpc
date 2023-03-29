@@ -26,6 +26,7 @@ jobs:
     steps:
     - name: Setup
       run: |
+        echo ${{ github.event.head_commit.message }}
         dnf install -y epel-release git python3
     - uses: actions/checkout@v3
     - id: files
@@ -104,11 +105,14 @@ jobs:
       run: dnf -y install git
     - uses: actions/checkout@v3
     - name: Setup
-      run: tests/ci/prepare-ci-environment.sh
+      run: |
+        tests/ci/prepare-ci-environment.sh
+        set -x
+        echo ${{ github.event.head_commit.message }}
     - id: files
       uses: Ana06/get-changed-files@v2.2.0
     - name: Test all modules
-      if: "contains(github.event.head_commit.message, 'ci-test-all')"
+      if: contains(github.event.head_commit.message, 'ci-test-all')
       run: echo "SIMPLE_CI_TEST_ALL=1" >> "${GITHUB_ENV}"
     - uses: actions/download-artifact@v3
       with:

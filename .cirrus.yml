@@ -21,6 +21,7 @@ task:
     JOB_SKIP_CI_SPECS: |
       components/perf-tools/likwid/SPECS/likwid.spec
   test_script: |
+    set -x
     if echo $CIRRUS_CHANGE_MESSAGE | grep -q ci-test-all --; then export SIMPLE_CI_TEST_ALL=1; fi
     export SKIP_CI_SPECS="${SKIP_CI_SPECS}${JOB_SKIP_CI_SPECS}"
     chown ohpc -R tests
