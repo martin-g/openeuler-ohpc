@@ -22,7 +22,8 @@ task:
       components/perf-tools/likwid/SPECS/likwid.spec
   test_script: |
     set -x
-    if echo $CIRRUS_CHANGE_MESSAGE | grep -q ci-test-all --; then export SIMPLE_CI_TEST_ALL=1; fi
+    CI_TEST_ALL=$(tests/ci/ci-test-all.sh $CIRRUS_PR "$CIRRUS_REPO_OWNER/$CIRRUS_REPO_NAME")
+    export SIMPLE_CI_TEST_ALL=$CI_TEST_ALL
     export SKIP_CI_SPECS="${SKIP_CI_SPECS}${JOB_SKIP_CI_SPECS}"
     chown ohpc -R tests
     tests/ci/setup_slurm_and_run_tests.sh ohpc $(tests/ci/cirrus_get_changed_files.sh)

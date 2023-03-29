@@ -25,15 +25,15 @@ jobs:
 
     steps:
     - name: Setup
-      run: |
-        dnf install -y epel-release git python3
+      run: dnf install -y epel-release git python3
     - uses: actions/checkout@v3
     - id: files
       uses: Ana06/get-changed-files@v2.2.0
     - name: Validate Changes
       run: |
-        last_commit=$(git log -1 --no-merges --pretty=%B)
-        echo $last_commit
+        set -x
+        commit_msg=$(git log -1 --no-merges --pretty=%B)
+        echo $commit_msg
         export SKIP_CI_SPECS="${{ env.SKIP_CI_SPECS }}${{ env.JOB_SKIP_CI_SPECS }}"
         tests/ci/check_spec.py ${{ steps.files.outputs.added_modified }}
 
@@ -119,8 +119,8 @@ jobs:
     - name: Run CI Tests
       run: |
         set -x
-        commit_msg=$(git log -1 --no-merges --pretty=%B)
-        if echo $commit_msg | grep -q ci-test-all --; then export SIMPLE_CI_TEST_ALL=1; fi
+        CI_TEST_ALL=$(tests/ci/ci-test-all.sh ${{ github.event.pull_request.number }} ${{ github.repository }})
+        export SIMPLE_CI_TEST_ALL=$CI_TEST_ALL
         export SKIP_CI_SPECS="${{ env.SKIP_CI_SPECS }}${{ env.JOB_SKIP_CI_SPECS }}"
         . /etc/profile.d/lmod.sh
         chown ohpc -R tests
