@@ -26,13 +26,14 @@ jobs:
     steps:
     - name: Setup
       run: |
-        echo ${{ github.event.head_commit.message }}
         dnf install -y epel-release git python3
     - uses: actions/checkout@v3
     - id: files
       uses: Ana06/get-changed-files@v2.2.0
     - name: Validate Changes
       run: |
+        last_commit=$(git log -1 --no-merges --pretty=%B)
+        echo $last_commit
         export SKIP_CI_SPECS="${{ env.SKIP_CI_SPECS }}${{ env.JOB_SKIP_CI_SPECS }}"
         tests/ci/check_spec.py ${{ steps.files.outputs.added_modified }}
 
@@ -111,15 +112,15 @@ jobs:
         echo ${{ github.event.head_commit.message }}
     - id: files
       uses: Ana06/get-changed-files@v2.2.0
-    - name: Test all modules
-      if: contains(github.event.head_commit.message, 'ci-test-all')
-      run: echo "SIMPLE_CI_TEST_ALL=1" >> "${GITHUB_ENV}"
     - uses: actions/download-artifact@v3
       with:
         name: rhel-rpms
         path: /home/ohpc/rpmbuild/RPMS
     - name: Run CI Tests
       run: |
+        set -x
+        commit_msg=$(git log -1 --no-merges --pretty=%B)
+        if echo $commit_msg | grep -q ci-test-all --; then export SIMPLE_CI_TEST_ALL=1; fi
         export SKIP_CI_SPECS="${{ env.SKIP_CI_SPECS }}${{ env.JOB_SKIP_CI_SPECS }}"
         . /etc/profile.d/lmod.sh
         chown ohpc -R tests
