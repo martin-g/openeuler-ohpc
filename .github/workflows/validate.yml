@@ -107,6 +107,9 @@ jobs:
       run: tests/ci/prepare-ci-environment.sh
     - id: files
       uses: Ana06/get-changed-files@v2.2.0
+    - name: Test all modules
+      if: "contains(github.event.head_commit.message, 'ci-test-all')"
+      run: echo "SIMPLE_CI_TEST_ALL=1" >> "${GITHUB_ENV}"
     - uses: actions/download-artifact@v3
       with:
         name: rhel-rpms

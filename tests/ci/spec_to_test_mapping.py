@@ -246,7 +246,13 @@ tests = ''
 admin_tests = ''
 pkgs = ''
 
-for i in sys.argv[1:]:
+specs_to_test = sys.argv[1:]
+
+test_all_specs_env = os.getenv('SIMPLE_CI_TEST_ALL')
+if test_all_specs_env:
+    specs_to_test = test_map.keys()
+
+for i in specs_to_test:
     if i in test_map.keys():
         if len(tests) > 0:
             tests += ' '
