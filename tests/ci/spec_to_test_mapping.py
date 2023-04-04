@@ -267,6 +267,36 @@ for i in specs_to_test:
             admin_tests += f'--enable-{test_map[i][1]}'
         pkgs += test_map[i][2]
 
+if test_all_specs_env:
+    pkgs = 'EasyBuild-ohpc R-gnu12-ohpc adios2-gnu12-openmpi4-ohpc \
+        autoconf-ohpc automake-ohpc boost-gnu12-openmpi4-ohpc \
+        charliecloud-ohpc cmake-ohpc conman-ohpc dimemas-gnu12-openmpi4-ohpc \
+        extrae-gnu12-openmpi4-ohpc fftw-gnu12-openmpi4-ohpc genders-ohpc \
+        gsl-gnu12-ohpc hdf5-gnu12-ohpc hpc-workspace-ohpc \
+        hypre-gnu12-openmpi4-ohpc imb-gnu12-openmpi4-ohpc libtool-ohpc \
+        lmod-defaults-gnu12-openmpi4-ohpc losf-ohpc magpie-ohpc \
+        metis-gnu12-ohpc mfem-gnu12-openmpi4-ohpc mrsh-ohpc \
+        mumps-gnu12-openmpi4-ohpc netcdf-cxx-gnu12-openmpi4-ohpc \
+        netcdf-fortran-gnu12-openmpi4-ohpc netcdf-gnu12-openmpi4-ohpc \
+        omb-gnu12-openmpi4-ohpc openblas-gnu12-ohpc \
+        opencoarrays-gnu12-openmpi4-ohpc papi-ohpc paraver-ohpc \
+        pdsh-mod-genders-ohpc pdsh-mod-slurm-ohpc pdsh-mod-slurm-ohpc \
+        pdsh-ohpc pdtoolkit-gnu12-ohpc petsc-gnu12-openmpi4-ohpc \
+        phdf5-gnu12-openmpi4-ohpc plasma-gnu12-ohpc pmix-ohpc \
+        pnetcdf-gnu12-openmpi4-ohpc ptscotch-gnu12-openmpi4-ohpc \
+        python3-Cython-ohpc python3-mpi4py-gnu12-openmpi4-ohpc \
+        python3-numpy-gnu12-ohpc scalapack-gnu12-openmpi4-ohpc \
+        scalasca-gnu12-openmpi4-ohpc scorep-gnu12-openmpi4-ohpc \
+        scotch-gnu12-ohpc sionlib-gnu12-openmpi4-ohpc \
+        slepc-gnu12-openmpi4-ohpc slurm-contribs-ohpc slurm-devel-ohpc \
+        slurm-libpmi-ohpc slurm-openlava-ohpc slurm-pam_slurm-ohpc \
+        slurm-perlapi-ohpc slurm-slurmdbd-ohpc slurm-sview-ohpc \
+        slurm-torque-ohpc superlu-gnu12-ohpc superlu_dist-gnu12-openmpi4-ohpc \
+        tau-gnu12-openmpi4-ohpc trilinos-gnu12-openmpi4-ohpc ucx-cma-ohpc \
+        ucx-rdmacm-ohpc valgrind-ohpc warewulf-cluster-ohpc \
+        warewulf-common-ohpc warewulf-ipmi-ohpc warewulf-provision-ohpc \
+        warewulf-vnfs-ohpc'
+
 print(
     'TESTS=(%s) ADMIN_TESTS=(%s) PKGS=(%s)' % (
         tests,
