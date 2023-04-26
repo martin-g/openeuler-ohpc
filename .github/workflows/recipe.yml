@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - 3.x
-  pull_request:
-    branches:
-      - 3.x
+      - run-recipe-on-gha
+  # pull_request:
+  #   branches:
+  #     - 3.x
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -14,18 +15,20 @@ concurrency:
 
 jobs:
   openEuler:
-    runs-on: ubuntu-latest
+    runs-on: 'self-hosted'
     name: Run recipe on openEuler
-    container:
-      image: docker.io/openeuler/openeuler:22.03-lts
+    # container:
+    #   image: docker.io/openeuler/openeuler:22.03-lts
     steps:
     - name: Switch repo
+# disable this step on self-hosted
+      if: failure()
       run: |
         sed -i "s@repo.openeuler.org@repo.huaweicloud.com/openeuler@g" /etc/yum.repos.d/openEuler.repo
         echo "[OpenHPC_oepkg]
         name=OpenHPC OEPKG
         type=rpm-md
-        baseurl=https://repo.oepkgs.net/openEuler/rpm/openEuler-22.03-LTS/contrib/OpenHPC/x86_64/
+        baseurl=https://repo.oepkgs.net/openEuler/rpm/openEuler-22.03-LTS/contrib/OpenHPC/$basearch//
         gpgcheck=0
         enabled=1" >> /etc/yum.repos.d/openEuler.repo
     - name: Install dependencies
