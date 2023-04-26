@@ -17,7 +17,7 @@ Summary:        OpenHPC documentation
 License:        BSD-3-Clause
 Group:          %{PROJ_NAME}/admin
 URL:            https://github.com/openhpc/ohpc
-Source0:        docs-ohpc.tar
+Source0:        https://github.com/martin-g/openeuler-ohpc/raw/run-recipe-on-gha/docs-ohpc.tar
 
 BuildRequires:  git
 BuildRequires:  make
@@ -76,10 +76,10 @@ from the OpenHPC software stack.
 %build
 %if 0%{?suse_version}
 %define source_path docs/recipes/install/leap15
-%else
-%if 0%{?rhel}
+%elif 0%{?rhel}
 %define source_path docs/recipes/install/centos8
-%endif
+%elif 0%{?openEuler}
+%define source_path docs/recipes/install/openeuler22.03
 %endif
 
 %define parser ../../../../parse_doc.pl
