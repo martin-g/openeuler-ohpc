@@ -20,24 +20,10 @@ jobs:
     # container:
     #   image: docker.io/openeuler/openeuler:22.03-lts
     steps:
-    - name: Switch repo
-# disable this step on self-hosted
-      if: failure()
-      run: |
-        sed -i "s@repo.openeuler.org@repo.huaweicloud.com/openeuler@g" /etc/yum.repos.d/openEuler.repo
-        echo "[OpenHPC_oepkg]
-        name=OpenHPC OEPKG
-        type=rpm-md
-        baseurl=https://repo.oepkgs.net/openEuler/rpm/openEuler-22.03-LTS/contrib/OpenHPC/$basearch//
-        gpgcheck=0
-        enabled=1" >> /etc/yum.repos.d/openEuler.repo
-    - name: Install dependencies
-      if: failure()
-      run: dnf -y install git make perl
     - uses: actions/checkout@v3
-    - name: Validate Build
+    - name: Run recipe
       run: |
-        set -x
+        set -xe
         . /etc/profile.d/lmod.sh
         sudo tests/ci/run_build.py ohpc components/admin/docs/SPECS/docs.spec
         sudo dnf -y install $(find /home/ohpc/rpmbuild/RPMS/ -name "*rpm") || true
@@ -48,7 +34,6 @@ jobs:
       if: always()
       with:
         name: recipe.sh
-        retention-days: 1
         path: |
           /opt/ohpc/pub/doc/recipes/openeuler22.03/aarch64/warewulf/slurm/recipe.sh
   
