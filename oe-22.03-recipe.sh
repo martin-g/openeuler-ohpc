@@ -149,6 +149,7 @@ cp -p /etc/resolv.conf $CHROOT/etc/resolv.conf
 # Add SLURM and other components to compute instance
 cp /etc/passwd /etc/group  $CHROOT/etc
 yum -y --installroot=$CHROOT install ohpc-slurm-client
+yum -y --installroot=$CHROOT install hwloc-ohpc
 chroot $CHROOT systemctl enable munge
 echo SLURMD_OPTIONS="--conf-server ${sms_ip}" > $CHROOT/etc/sysconfig/slurmd
 yum -y --installroot=$CHROOT install chrony
@@ -388,7 +389,7 @@ fi
 # Boot compute nodes (Section 3.10)
 # ---------------------------------
 for ((i=0; i<${num_computes}; i++)) ; do
-   ipmitool -E -I lanplus -H ${c_bmc[$i]} -U ${bmc_username} -P ${bmc_password} chassis power reset
+   ipmitool -I lanplus -H ${c_bmc[$i]} -U ${bmc_username} -P ${bmc_password} chassis power reset
 done
 
 # ---------------------------------------

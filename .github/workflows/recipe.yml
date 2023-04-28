@@ -23,7 +23,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Run recipe
       run: |
-        set -xe
+        set -x
         . /etc/profile.d/lmod.sh
         #sudo tests/ci/run_build.py ohpc components/admin/docs/SPECS/docs.spec
         #sudo dnf -y install $(find /home/ohpc/rpmbuild/RPMS/ -name "*rpm") || true
