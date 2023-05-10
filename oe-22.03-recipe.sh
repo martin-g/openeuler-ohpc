@@ -484,12 +484,13 @@ systemctl enable munge
 systemctl enable slurmctld
 systemctl start munge
 systemctl start slurmctld
-pdsh -w $compute_prefix[1-4] systemctl start munge
-pdsh -w $compute_prefix[1-4] systemctl start slurmd
+export PDSH_SSH_ARGS_APPEND="-i $HOME/.ssh/cluster"
+pdsh -l root -w $compute_prefix[1-3] systemctl start munge
+pdsh -l root -w $compute_prefix[1-3] systemctl start slurmd
 
 # Optionally, generate nhc config
-pdsh -w c1 "/usr/sbin/nhc-genconf -H '*' -c -" | dshbak -c 
-useradd -m test
+pdsh -l root -w c1 "/usr/sbin/nhc-genconf -H '*' -c -" | dshbak -c 
+getent passwd test > /dev/null || useradd -m test
 wwsh file resync passwd shadow group
 sleep 2
-pdsh -w $compute_prefix[1-4] /warewulf/bin/wwgetfiles 
+pdsh -l root -w $compute_prefix[1-3] /warewulf/bin/wwgetfiles 
