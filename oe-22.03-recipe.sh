@@ -489,7 +489,7 @@ pdsh -l root -w $compute_prefix[1-3] systemctl start munge
 pdsh -l root -w $compute_prefix[1-3] systemctl start slurmd
 
 # Optionally, generate nhc config
-pdsh -l root -w c1 "/usr/sbin/nhc-genconf -H '*' -c -" | dshbak -c 
+pdsh -l root -w $compute_prefix[1-3] "/usr/sbin/nhc-genconf -H '*' -c -" | dshbak -c 
 getent passwd test > /dev/null || useradd -m test
 wwsh file resync passwd shadow group
 sleep 2
