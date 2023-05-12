@@ -34,6 +34,9 @@ echo "--------------- DEBUG END -----------------"
 # execution on the master SMS host.
 # -----------------------------------------------------------------------------------------
 
+# Get rid of any previous SSH sessions
+rm -f ~/.ssh/known_hosts
+
 # Verify OpenHPC repository has been enabled before proceeding
 
 yum repolist | grep -q OpenHPC
