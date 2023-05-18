@@ -389,13 +389,6 @@ wwsh -y provision set "${compute_regex}" --kargs="${kargs}"
 fi
 
 # ---------------------------------
-# Enable PXE boot as first order
-# ---------------------------------
-for ((i=0; i<${num_computes}; i++)) ; do
-   ipmitool -I lanplus -H ${c_bmc[$i]} -U ${bmc_username} -P ${bmc_password} chassis bootdev pxe
-done
-
-# ---------------------------------
 # Boot compute nodes (Section 3.10)
 # ---------------------------------
 for ((i=0; i<${num_computes}; i++)) ; do
