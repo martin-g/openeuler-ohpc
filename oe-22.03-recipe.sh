@@ -138,7 +138,7 @@ fi
 export CHROOT=/opt/ohpc/admin/images/openeuler22.03
 wwmkchroot -v openeuler-22.03 $CHROOT
 dnf -y --installroot $CHROOT install openEuler-release
-cp -p /etc/yum.repos.d/OpenHPC*.repo $CHROOT/etc/yum.repos.d
+cp -p /etc/yum.repos.d/OpenHPC*.repo $CHROOT/etc/yum.repos.d/
 
 # ------------------------------------------------------------
 # Add OpenHPC base components to compute image (Section 3.8.2)
@@ -334,13 +334,13 @@ fi
 # ----------------------------
 # Import files (Section 3.8.5)
 # ----------------------------
-wwsh file import /etc/passwd
-wwsh file import /etc/group
-wwsh file import /etc/shadow 
-wwsh file import /etc/munge/munge.key
+wwsh -y file import /etc/passwd
+wwsh -y file import /etc/group
+wwsh -y file import /etc/shadow 
+wwsh -y file import /etc/munge/munge.key
 
 if [[ ${enable_ipoib} -eq 1 ]];then
-     wwsh file import /opt/ohpc/pub/examples/network/centos/ifcfg-ib0.ww
+     wwsh -y file import /opt/ohpc/pub/examples/network/centos/ifcfg-ib0.ww
      wwsh -y file set ifcfg-ib0.ww --path=/etc/sysconfig/network-scripts/ifcfg-ib0
 fi
 
@@ -488,12 +488,12 @@ systemctl enable slurmctld
 systemctl start munge
 systemctl start slurmctld
 export PDSH_SSH_ARGS_APPEND="-i $HOME/.ssh/cluster"
-pdsh -l root -w $compute_prefix[1-3] systemctl start munge
-pdsh -l root -w $compute_prefix[1-3] systemctl start slurmd
+pdsh -l root -w $compute_prefix[1-$num_computes] systemctl start munge
+pdsh -l root -w $compute_prefix[1-$num_computes] systemctl start slurmd
 
 # Optionally, generate nhc config
-pdsh -l root -w $compute_prefix[1-3] "/usr/sbin/nhc-genconf -H '*' -c -" | dshbak -c 
+pdsh -l root -w $compute_prefix[1-$num_computes] "/usr/sbin/nhc-genconf -H '*' -c -" | dshbak -c 
 getent passwd test > /dev/null || useradd -m test
-wwsh file resync passwd shadow group
+wwsh -y file resync passwd shadow group
 sleep 2
 pdsh -l root -w $compute_prefix[1-3] /warewulf/bin/wwgetfiles 
