@@ -15,4 +15,4 @@ num_computes=${#c_ip[@]}
 bmc_username=root
 bmc_password=openhpc12#$
 export CHROOT=/opt/ohpc/admin/images/openeuler22.03
-provision_wait="${provision_wait:-180}"
+provision_wait="${provision_wait:-360}"
