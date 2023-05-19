@@ -16,7 +16,7 @@
 
 set -x
 
-inputFile=${OHPC_INPUT_LOCAL:-/opt/ohpc/pub/doc/recipes/openeuler22.03/input.local}
+inputFile=${OHPC_INPUT_LOCAL:-/opt/ohpc/pub/doc/recipes/openeuler22.03/input.local.tests}
 
 if [ ! -e ${inputFile} ];then
    echo "Error: Unable to access local input file -> ${inputFile}"
@@ -487,6 +487,11 @@ systemctl enable munge
 systemctl enable slurmctld
 systemctl start munge
 systemctl start slurmctld
+
+for ((i=0; i<$num_computes; i++)) ; do
+     scontrol update node=$compute_prefix[$i] state=resume
+done
+
 export PDSH_SSH_ARGS_APPEND="-i $HOME/.ssh/cluster"
 pdsh -l root -w $compute_prefix[1-$num_computes] systemctl start munge
 pdsh -l root -w $compute_prefix[1-$num_computes] systemctl start slurmd
@@ -497,3 +502,16 @@ getent passwd test > /dev/null || useradd -m test
 wwsh -y file resync passwd shadow group
 sleep 2
 pdsh -l root -w $compute_prefix[1-3] /warewulf/bin/wwgetfiles 
+
+
+runuser -l test -c 'mpicc -O3 /opt/ohpc/pub/examples/mpi/hello.c && salloc -n 8 -N 2 --no-shell prun ./a.out'
+
+exit 0
+
+# Switch to "test" user
+su - test
+# Compile MPI "hello world" example
+mpicc -O3 /opt/ohpc/pub/examples/mpi/hello.c
+# Submit interactive job request and use prun to launch executable
+salloc -n 8 -N 2 prun ./a.out
+
