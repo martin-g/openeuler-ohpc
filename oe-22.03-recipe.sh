@@ -167,7 +167,7 @@ wwinit database
 wwinit ssh_keys
 echo "${sms_ip}:/home /home nfs nfsvers=4,nodev,nosuid 0 0" >> $CHROOT/etc/fstab
 echo "${sms_ip}:/opt/ohpc/pub /opt/ohpc/pub nfs nfsvers=4,nodev 0 0" >> $CHROOT/etc/fstab
-echo "/home *(rw,no_subtree_check,fsid=10,no_root_squash)" >> /etc/exports
+echo "/home *(rw,no_subtree_check,fsid=10,no_root_squash)" > /etc/exports
 echo "/opt/ohpc/pub *(ro,no_subtree_check,fsid=11)" >> /etc/exports
 if [[ ${enable_intel_packages} -eq 1 ]];then
      mkdir /opt/intel
@@ -317,8 +317,9 @@ fi
 yum -y install nhc-ohpc
 yum -y --installroot=$CHROOT install nhc-ohpc
 
-echo "HealthCheckProgram=/usr/sbin/nhc" >> /etc/slurm/slurm.conf
-echo "HealthCheckInterval=300" >> /etc/slurm/slurm.conf  # execute every five minutes
+#echo "HealthCheckProgram=/usr/sbin/nhc" >> /etc/slurm/slurm.conf
+#echo "HealthCheckInterval=300" >> /etc/slurm/slurm.conf  # execute every five minutes
+echo "HealthCheckInterval=0" >> /etc/slurm/slurm.conf  # disable health checks
 
 # Optionally, update compute image to support geopm
 if [[ ${enable_geopm} -eq 1 ]];then
@@ -349,7 +350,7 @@ fi
 # --------------------------------------
 export WW_CONF=/etc/warewulf/bootstrap.conf
 echo "drivers += updates/kernel/" >> $WW_CONF
-wwbootstrap `uname -r`
+yes | wwbootstrap `uname -r`
 # Assemble VNFS
 wwvnfs --chroot $CHROOT
 # Add hosts to cluster
@@ -488,20 +489,22 @@ systemctl enable slurmctld
 systemctl start munge
 systemctl start slurmctld
 
-for ((i=0; i<$num_computes; i++)) ; do
-     scontrol update node=$compute_prefix[$i] state=resume
+journalctl --no-pager --no-tail -u slurmctld.service | tail -n 20
+
+for ((i=1; i<=$num_computes; i++)) ; do
+     scontrol update node=${compute_prefix}${i} state=resume
 done
 
 export PDSH_SSH_ARGS_APPEND="-i $HOME/.ssh/cluster"
-pdsh -l root -w $compute_prefix[1-$num_computes] systemctl start munge
-pdsh -l root -w $compute_prefix[1-$num_computes] systemctl start slurmd
+pdsh -l root -w ${compute_prefix}[1-$num_computes] systemctl start munge
+pdsh -l root -w ${compute_prefix}[1-$num_computes] systemctl start slurmd
 
 # Optionally, generate nhc config
-pdsh -l root -w $compute_prefix[1-$num_computes] "/usr/sbin/nhc-genconf -H '*' -c -" | dshbak -c 
+#pdsh -l root -w ${compute_prefix}[1-$num_computes] "/usr/sbin/nhc-genconf -H '*' -c -" | dshbak -c 
 getent passwd test > /dev/null || useradd -m test
 wwsh -y file resync passwd shadow group
 sleep 2
-pdsh -l root -w $compute_prefix[1-3] /warewulf/bin/wwgetfiles 
+pdsh -l root -w ${compute_prefix}[1-3] /warewulf/bin/wwgetfiles 
 
 
 runuser -l test -c 'mpicc -O3 /opt/ohpc/pub/examples/mpi/hello.c && salloc -n 8 -N 2 --no-shell prun ./a.out'
