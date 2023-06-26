@@ -1,0 +1,19 @@
+sms_ip=192.168.1.220
+sms_name=sms
+sms_eth_internal=enp189s0f0
+eth_provision=enp189s0f0
+internal_netmask=255.255.252.0
+ntp_server=192.168.1.220
+c_ip=(192.168.1.221 192.168.1.222 192.168.1.223)
+c_name=(c1 c2 c3)
+c_bmc=(192.168.2.221 192.168.2.222 192.168.2.223)
+c_mac=(f4:de:af:6c:e2:87 f4:de:af:6c:e2:95 f4:de:af:6c:e2:6b)
+num_computes=${#c_ip[@]}
+compute_regex=c[1-$num_computes]
+compute_prefix=c
+kargs='net.ifnames=1'
+bmc_username=root
+bmc_password=$BMC_PASSWORD
+export CHROOT=/opt/ohpc/admin/images/openeuler22.03
+provision_wait="${provision_wait:-360}"
+update_slurm_nodeconfig=1
