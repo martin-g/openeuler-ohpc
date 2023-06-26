@@ -40,9 +40,13 @@ jobs:
         #sudo bash /opt/ohpc/pub/doc/recipes/openeuler22.03/aarch64/warewulf/slurm/recipe.sh
         #sudo bash oe-22.03-recipe.sh
     - uses: actions/upload-artifact@v3
-      if: always()
       with:
         name: recipe.sh
         path: |
           /opt/ohpc/pub/doc/recipes/openeuler22.03/aarch64/warewulf/slurm/recipe.sh
+    - uses: actions/upload-artifact@v3
+      with:
+        name: rpms
+        path: |
+          /home/ohpc/rpmbuild/RPMS/x86_64/docs-ohpc-3.0.0-19999.ci.ohpc.x86_64.rpm
   
