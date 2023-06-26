@@ -18,12 +18,18 @@ env:
 
 jobs:
   openEuler:
-    runs-on: 'self-hosted'
+    runs-on: 'ubuntu-22.04'
     name: Run recipe on openEuler
-    # container:
-    #   image: docker.io/openeuler/openeuler:22.03-lts
+    container:
+      image: docker.io/openeuler/openeuler:22.03-lts
     steps:
+    - name: Switch repo
+      run: sed -i "s@repo.openeuler.org@repo.huaweicloud.com/openeuler@g" /etc/yum.repos.d/openEuler.repo
+    - name: Install git
+      run: dnf -y install git sudo
     - uses: actions/checkout@v3
+    - name: Setup
+      run: tests/ci/prepare-ci-environment.sh
     - name: Run recipe
       run: |
         set -x
