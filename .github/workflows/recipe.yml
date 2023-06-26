@@ -28,11 +28,11 @@ jobs:
       run: |
         set -x
         . /etc/profile.d/lmod.sh
-        #sudo tests/ci/run_build.py ohpc components/admin/docs/SPECS/docs.spec
-        #sudo dnf -y install $(find /home/ohpc/rpmbuild/RPMS/ -name "*rpm") || true
+        sudo tests/ci/run_build.py ohpc components/admin/docs/SPECS/docs.spec
+        sudo dnf -y install $(find /home/ohpc/rpmbuild/RPMS/ -name "*rpm") || true
         export OHPC_INPUT_LOCAL=./docs/recipes/install/openeuler22.03/input.local.tests
         #sudo bash /opt/ohpc/pub/doc/recipes/openeuler22.03/aarch64/warewulf/slurm/recipe.sh
-        sudo bash oe-22.03-recipe.sh
+        #sudo bash oe-22.03-recipe.sh
     - uses: actions/upload-artifact@v3
       if: always()
       with:
