@@ -32,6 +32,7 @@ BuildRequires:  texlive-tcolorbox
 BuildRequires:  texlive-environ
 BuildRequires:  texlive-trimspaces
 BuildRequires:  texlive-amsmath
+BuildRequires:  texlive-xetex
 
 %if 0%{?suse_version}
 BuildRequires:  libstdc++6
