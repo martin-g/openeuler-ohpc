@@ -39,6 +39,7 @@ BuildRequires:  texlive-latexmk
 BuildRequires:  texlive-epstopdf-pkg
 BuildRequires:  texlive-listings
 BuildRequires:  texlive-geometry
+BuildRequires:  texlive-ctex
 %endif
 
 %if 0%{?rhel} || 0%{?openEuler}
@@ -63,6 +64,7 @@ BuildRequires:  tex
 BuildRequires:  texlive-pdftex
 BuildRequires:  texlive-epstopdf
 BuildRequires:  texlive-collection-basic
+BuildRequires:  texlive-ctex
 %endif
 
 %description
