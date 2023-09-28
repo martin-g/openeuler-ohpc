@@ -155,7 +155,10 @@ make ; %{parser} steps.tex > recipe.sh ; popd
 pushd docs/recipes/install/openeuler22.03/aarch64/warewulf/slurm
 make ; %{parser} steps.tex > recipe.sh ; popd
 
-pushd docs/recipes/install/openeuler22.03/aarch64/warewulf/openpbs
+pushd docs/recipes/install/openeuler22.03/aarch64/warewulf/openpbs/english
+make ; %{parser} steps.tex > recipe.sh ; popd
+
+pushd docs/recipes/install/openeuler22.03/aarch64/warewulf/openpbs/chinese-simplified
 make ; %{parser} steps.tex > recipe.sh ; popd
 
 %install
