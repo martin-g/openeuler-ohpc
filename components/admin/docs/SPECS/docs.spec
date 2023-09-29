@@ -66,6 +66,8 @@ BuildRequires:  texlive-pdftex
 BuildRequires:  texlive-epstopdf
 BuildRequires:  texlive-collection-basic
 BuildRequires:  texlive-ctex
+BuildRequires:  texlive-xecjk
+BuildRequires:  texlive-fandol
 %endif
 
 %description
@@ -159,9 +161,12 @@ pushd docs/recipes/install/openeuler22.03/aarch64/warewulf/slurm
 make ; %{parser} steps.tex > recipe.sh ; popd
 
 pushd docs/recipes/install/openeuler22.03/aarch64/warewulf/openpbs/english
-make ; %{parser} steps.tex > recipe.sh ; popd
+%define parser ../../../../../parse_doc.pl
+make ; %{parser} steps.tex > recipe.sh ; 
+popd
 
 pushd docs/recipes/install/openeuler22.03/aarch64/warewulf/openpbs/chinese-simplified
+%define parser ../../../../../parse_doc.pl
 make ; %{parser} steps.tex > recipe.sh ; popd
 
 %install
@@ -254,8 +259,10 @@ install -m 0644 -p -D docs/recipes/install/%{lpath}/steps.pdf %{buildroot}/%{OHP
 install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
 
 %define lpath openeuler22.03/aarch64/warewulf/openpbs
-install -m 0644 -p -D docs/recipes/install/%{lpath}/steps.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/Install_guide.pdf
-install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
+install -m 0644 -p -D docs/recipes/install/%{lpath}/english/steps.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/english/Install_guide.pdf
+install -m 0755 -p -D docs/recipes/install/%{lpath}/english/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/english/recipe.sh
+install -m 0644 -p -D docs/recipes/install/%{lpath}/chinese-simplified/steps.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/chinese-simplified/Install_guide.pdf
+install -m 0755 -p -D docs/recipes/install/%{lpath}/chinese-simplified/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/chinese-simplified/recipe.sh
 
 # input file templates
 #install -m 0644 -p docs/recipes/install/centos8/input.local.template %{buildroot}/%{OHPC_PUB}/doc/recipes/centos8/input.local
