@@ -80,13 +80,10 @@ from the OpenHPC software stack.
 %prep
 %setup -n docs-ohpc
 %if 0%{?openEuler}
-tar -C /tmp -xvzf %{SOURCE1}
-mkdir ~/bin
-ln -s /tmp/quarto-%{quarto_version}/bin/quarto ~/bin/quarto
-export PATH=$HOME/bin:$PATH
-
-quarto check
-wkhtmltopdf --help
+tar -C /tmp -xzf %{SOURCE1}
+mkdir -p ${HOME}/bin
+ln -s /tmp/quarto-%{quarto_version}/bin/quarto ${HOME}/bin/quarto
+export PATH=${HOME}/bin:$PATH
 %endif
 
 %build
@@ -185,7 +182,9 @@ make ; %{parser} steps.tex > recipe.sh ; popd
 
 %if 0%{?openEuler}
 pushd docs/recipes/install/openeuler22.03/aarch64/warewulf/slurm
-make ; %{parser} steps.tex > recipe.sh ; popd
+make
+# %{parser} steps.tex > recipe.sh 
+popd
 
 pushd docs/recipes/install/openeuler22.03/aarch64/warewulf/openpbs/english
 %define parser ../../../../../parse_doc.pl
@@ -257,11 +256,11 @@ install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHP
 %if 0%{?openEuler}
 %define lpath openeuler22.03/x86_64/warewulf/slurm
 install -m 0644 -p -D docs/recipes/install/%{lpath}/steps.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/Install_guide.pdf
-install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
+#install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
 
 %define lpath openeuler22.03/x86_64/warewulf/openpbs
 install -m 0644 -p -D docs/recipes/install/%{lpath}/steps.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/Install_guide.pdf
-install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
+#install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
 %endif
 
 # aarch64 guides
@@ -297,13 +296,13 @@ install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHP
 %if 0%{?openEuler}
 %define lpath openeuler22.03/aarch64/warewulf/slurm
 install -m 0644 -p -D docs/recipes/install/%{lpath}/steps.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/Install_guide.pdf
-install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
+#install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
 
 %define lpath openeuler22.03/aarch64/warewulf/openpbs
 install -m 0644 -p -D docs/recipes/install/%{lpath}/english/steps.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/english/Install_guide.pdf
-install -m 0755 -p -D docs/recipes/install/%{lpath}/english/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/english/recipe.sh
+#install -m 0755 -p -D docs/recipes/install/%{lpath}/english/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/english/recipe.sh
 install -m 0644 -p -D docs/recipes/install/%{lpath}/chinese-simplified/steps.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/chinese-simplified/Install_guide.pdf
-install -m 0755 -p -D docs/recipes/install/%{lpath}/chinese-simplified/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/chinese-simplified/recipe.sh
+#install -m 0755 -p -D docs/recipes/install/%{lpath}/chinese-simplified/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/chinese-simplified/recipe.sh
 %endif
 
 # input file templates

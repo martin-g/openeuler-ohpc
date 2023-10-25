@@ -1,0 +1,43 @@
+---
+title: "OpenHPC documentation"
+pdf-engine: wkhtmltopdf
+title-block-banner: true
+format:
+  html:
+    code-fold: true
+  pdf:
+    toc: true
+    number-sections: true
+    colorlinks: true
+openhpc: OpenHPC
+openhpc2:
+  install: dnf install -y
+---
+
+{{< include _imported.qmd >}}
+
+# A Chinese text
+
+也有繁、簡體版，可通過每頁左上角的連結隨時調整 1
+
+## Sub title
+
+英文版本 2
+
+### Third level
+
+網站有中 3
+
+# A English text
+
+Level 1
+
+## Sub title 2
+
+Level 2
+
+### Third level
+
+Level 3
+
+For a demonstration of a line plot on a polar axis, see ....

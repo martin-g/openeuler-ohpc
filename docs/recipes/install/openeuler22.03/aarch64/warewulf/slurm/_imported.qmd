@@ -1,0 +1,8 @@
+Blah is included [includes](https://quarto.org/docs/authoring/includes.html)
+
+Using variables [variables](https://quarto.org/docs/authoring/variables.html):
+
+Simple:
+{{< meta openhpc >}}
+
+Complex: {{< meta openhpc2.install >}}
