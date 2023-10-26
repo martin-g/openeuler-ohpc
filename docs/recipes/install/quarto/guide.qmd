@@ -1,0 +1,24 @@
+---
+documentclass: ctexart
+title-block-banner: true
+---
+
+CPU arch is: {{< meta ohpc.cpu_arch >}}
+
+# {{< meta ohpc.content.level1.heading >}}
+
+{{< meta ohpc.content.level1.text >}}
+
+## {{< meta ohpc.content.level2.heading >}} 
+
+{{< meta ohpc.content.level2.text >}}
+
+### {{< meta ohpc.content.level3.heading >}}
+
+{{< meta ohpc.content.level3.text >}}
+
+{{< include _imported.qmd >}}
+
+dnf install texlive-xetex texlive-fontspec texlive-footnotehyper texlive-tcolorbox texlive-lm-math texlive-collection-langchinese texlive-xecjk texlive-fandol
+
+texlive-texconfig texlive-helvetic texlive-ec  texlive-cm-super latexmk texlive-mdwtools texlive-multirow 

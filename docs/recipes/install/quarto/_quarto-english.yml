@@ -1,0 +1,14 @@
+pdf:
+  lang: en
+
+ohpc:
+  content:
+    level1: 
+      heading: An English heading
+      text: Level 1 text
+    level2: 
+      heading: Level 2 heading
+      text: Level 2 text
+    level3: 
+      heading: Level 3 heading
+      text: Level 3 text

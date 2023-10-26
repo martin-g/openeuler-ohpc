@@ -1,0 +1,28 @@
+# Global Quarto configuration
+# https://quarto.org/docs/projects/quarto-projects.html#project-metadata
+# https://quarto.org/docs/reference/projects/options.html
+
+project:
+  output-dir: _output
+  render:
+    - guide.qmd
+
+format:
+  pdf:
+    toc: true
+    number-sections: true
+    toc-depth: 5
+    number-depth: 5
+    code-fold: true
+    colorlinks: true
+    linkcolor: blue
+    urlcolor: blue
+
+
+# OpenHPC specific metadata that is applicable to all profiles 
+ohpc:
+  openhpc: OpenHPC
+  openhpc2:
+    install: yum install -y
+  openhpc3:
+    install: dnf install -y

@@ -1,0 +1,14 @@
+pdf:
+  lang: zh
+
+ohpc:
+  content:
+    level1: 
+      heading: A Chinese text
+      text: 也有繁、簡體版，可通過每頁左上角的連結隨時調整 1
+    level2: 
+      heading: Sub title
+      text: 英文版本 2
+    level3: 
+      heading: Third level
+      text: 網站有中 3
