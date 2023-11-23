@@ -1,0 +1,4 @@
+
+ohpc:
+  provisioner: Warewulf
+  provheader: Warewulf

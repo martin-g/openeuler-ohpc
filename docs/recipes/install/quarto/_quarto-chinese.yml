@@ -1,6 +1,10 @@
 pdf:
   lang: zh
 
+format:
+  pdf:
+    documentclass: ctexart
+
 ohpc:
   content:
     level1: 

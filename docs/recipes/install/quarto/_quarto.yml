@@ -9,6 +9,8 @@ project:
 
 format:
   pdf:
+    documentclass: article
+    papersize: letter
     toc: true
     number-sections: true
     toc-depth: 5
@@ -17,12 +19,15 @@ format:
     colorlinks: true
     linkcolor: blue
     urlcolor: blue
+    template-partials:
+      - partials/before-body.tex
+    header-includes:
+      - \usepackage{../common/ohpc-doc}
+  html:
+    title-block-banner: true
 
 
 # OpenHPC specific metadata that is applicable to all profiles 
 ohpc:
   openhpc: OpenHPC
-  openhpc2:
-    install: yum install -y
-  openhpc3:
-    install: dnf install -y
+  revision: 3.x

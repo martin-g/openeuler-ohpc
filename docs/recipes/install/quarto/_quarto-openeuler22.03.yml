@@ -2,3 +2,24 @@ title: "OpenHPC documentation for openEuler 22.03 LTS"
 
 ohpc:
   openhpc: OpenHPC on openEuler 22.03
+  baseOS: openEuler 22.03
+  OSRepo: openEuler\_22.03
+  OSTree: openEuler\_22.03
+  OSTag: oe2203
+  baseos: openeuler22.03
+  baseosshort: openeuler22.03
+  
+  # Define package manager commands
+  pkgmgr: yum
+  addrepo: wget -P /etc/yum.repos.d
+  chrootaddrepo: wget -P \$CHROOT/etc/yum.repos.d
+  clean: yum clean expire-cache
+  chrootclean: yum --installroot=\$CHROOT clean expire-cache
+  install: yum -y install
+  chrootinstall: yum -y --installroot=\$CHROOT install
+  groupinstall: yum -y groupinstall
+  groupchrootinstall: yum -y --installroot=\$CHROOT groupinstall
+  remove: yum -y remove
+  upgrade: yum -y upgrade
+  chrootupgrade: yum -y --installroot=\$CHROOT upgrade
+  tftppkg: syslinux-tftpboot

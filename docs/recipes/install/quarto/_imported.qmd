@@ -6,5 +6,3 @@ Using variables [variables](https://quarto.org/docs/authoring/variables.html):
 
 Simple:
 {{< meta ohpc.openhpc >}}
-
-Complex: {{< meta ohpc.openhpc3.install >}}
