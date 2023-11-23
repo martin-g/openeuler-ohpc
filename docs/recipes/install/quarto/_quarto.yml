@@ -22,7 +22,7 @@ format:
     template-partials:
       - partials/before-body.tex
     header-includes:
-      - \usepackage{../common/ohpc-doc}
+      - \usepackage{./common/ohpc-doc}
   html:
     title-block-banner: true
 
