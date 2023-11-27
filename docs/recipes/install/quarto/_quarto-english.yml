@@ -12,3 +12,11 @@ ohpc:
     level3: 
       heading: Level 3 heading
       text: Level 3 text
+  title:
+    clusterBuildingRecipes: Cluster Building Recipes
+    baseOsSuffix: Base OS
+    editionForLinux: Edition for Linux*
+  
+format:
+  pdf: 
+    toc-title: Contents

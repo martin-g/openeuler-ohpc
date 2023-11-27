@@ -12,6 +12,8 @@ format:
     papersize: letter
     number-sections: true
     toc-depth: 5
+    toc-title: Contents
+    toccolor: blue
     number-depth: 5
     code-fold: true
     colorlinks: true
