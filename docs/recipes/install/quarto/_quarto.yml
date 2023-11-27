@@ -3,7 +3,6 @@
 # https://quarto.org/docs/reference/projects/options.html
 
 project:
-  output-dir: _output
   render:
     - guide.qmd
 
@@ -11,7 +10,6 @@ format:
   pdf:
     documentclass: article
     papersize: letter
-    toc: true
     number-sections: true
     toc-depth: 5
     number-depth: 5
@@ -23,6 +21,7 @@ format:
       - partials/before-body.tex
     header-includes:
       - \usepackage{./common/ohpc-doc}
+    keep-tex: true
   html:
     title-block-banner: true
 
@@ -31,3 +30,18 @@ format:
 ohpc:
   openhpc: OpenHPC
   revision: 3.x
+  version: 3.1
+  # Define package manager commands
+  pkgmgr: yum
+  addrepo: wget -P /etc/yum.repos.d
+  chrootaddrepo: wget -P \$CHROOT/etc/yum.repos.d
+  clean: yum clean expire-cache
+  chrootclean: yum --installroot=\$CHROOT clean expire-cache
+  install: yum -y install
+  chrootinstall: yum -y --installroot=\$CHROOT install
+  groupinstall: yum -y groupinstall
+  groupchrootinstall: yum -y --installroot=\$CHROOT groupinstall
+  remove: yum -y remove
+  upgrade: yum -y upgrade
+  chrootupgrade: yum -y --installroot=\$CHROOT upgrade
+  tftppkg: syslinux-tftpboot

@@ -1,13 +1,15 @@
 ![OpenHPC logo](../common/figures/ohpc_logo_blue.png)
 
+MyCustom3: $mycustom$
+
 <!-- Title page and running header definition 
 
 \lhead{ \small {\color{logodarkgrey}\fontfamily{phv}\selectfont { Install Guide
     (v\OHPCVersion{})}:  {\baseOS{}/\arch{} + \provheader{} + \rms{}} } \vspace*{0pt} }
 
-{\hspace*{4in} \includegraphics[width=1.7in]{ohpc_logo_blue.pdf}}
+% {\hspace*{4in} \includegraphics[width=1.7in]{ohpc_logo_blue2.pdf}}
 
-![OpenHPC logo](../common/figures/ohpc_logo_blue.png)
+![OpenHPC logo](../common/figures/ohpc_logo_blue3.png)
 
 \vspace*{2cm}
 \noindent {\LARGE \color{logodarkgrey} \fontfamily{phv}\selectfont OpenHPC (v\OHPCVersion{})} \vspace*{0.1cm} \\
