@@ -62,6 +62,8 @@ ohpc:
           Installation information is also discussed to optionally mount a
           parallel file system and in this case, the parallel file system is assumed to
           exist previously.
+        paragraph1-figure-caption: |
+          Overview of physical cluster architecture.
         paragraph2: |
           An outline of the physical architecture discussed is shown in
           Figure~\ref{fig:physical_arch} and highlights the high-level networking
@@ -83,6 +85,16 @@ ohpc:
           hosts. This high speed network is used for application message passing and
           optionally for parallel file system connectivity as well (e.g. to
           existing {{< meta ohpc.Lustre >}} or BeeGFS storage targets).
+      inputs:
+        title: Inputs
+        paragraph1: |
+          As this recipe details installing a cluster starting from bare-metal, there is a requirement to define IP addresses and
+          gather hardware MAC addresses in order to support a controlled provisioning process. These values are necessarily unique
+          to the hardware being used, and this document uses variable substitution **$\{variable\}** in the command-line
+          examples that follow to highlight where local site inputs are required. A summary of the required and optional variables
+          used throughout this recipe are presented below. Note that while the example definitions above correspond to a small
+          4-node compute subsystem, the compute parameters are defined in array format to accommodate logical extension to larger
+          node counts.
 
     level1: 
       heading: An English heading

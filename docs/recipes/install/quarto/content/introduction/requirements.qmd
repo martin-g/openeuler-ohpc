@@ -1,0 +1,20 @@
+## {{< meta ohpc.content.introduction.requirements.title >}}
+
+{{< meta ohpc.content.introduction.requirements.paragraph1 >}}
+
+::: {.content-visible when-profile="x86_64"}
+{{< meta ohpc.content.introduction.requirements.paragraph1-x86_64 >}}
+:::
+
+::: {.content-visible when-profile="x86_64"}
+![{{< meta ohpc.content.introduction.requirements.paragraph1-figure-caption >}}](./figures/ohpc-arch-small3.pdf)
+:::
+::: {.content-visible when-profile="aarch64"}
+![{{< meta ohpc.content.introduction.requirements.paragraph1-figure-caption >}}](./figures/ohpc-arch-small-eth.pdf)
+:::
+
+{{< meta ohpc.content.introduction.requirements.paragraph2 >}}
+
+::: {.content-visible when-profile="x86_64"}
+{{< meta ohpc.content.introduction.requirements.paragraph2-x86_64 >}}
+:::

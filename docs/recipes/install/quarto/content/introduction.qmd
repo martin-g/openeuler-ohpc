@@ -7,3 +7,5 @@
 {{< include content/introduction/audience.qmd >}}
 
 {{< include content/introduction/requirements.qmd >}}
+
+{{< include content/introduction/inputs.qmd >}}
