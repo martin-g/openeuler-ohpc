@@ -3,6 +3,87 @@ pdf:
 
 ohpc:
   content:
+    introduction:
+      title: Introduction
+      contents: |
+        This guide presents a simple cluster installation procedure using components
+        from the {{< meta ohpc.openhpc >}} software stack. {{< meta ohpc.openhpc >}} 
+        represents an aggregation of a number
+        of common ingredients required to deploy and manage an HPC Linux* cluster
+        including provisioning tools, resource management, I/O clients, development
+        tools, and a variety of scientific libraries. These packages have been
+        pre-built with HPC integration in mind while conforming to common \Linux{}
+        distribution standards.
+        The documentation herein is intended to
+        be reasonably generic, but uses the underlying motivation of a small, 4-node
+        \iftoggleverb{isxCATstateful} stateful \else stateless \fi 
+        cluster installation to define a step-by-step process. Several
+        optional customizations are included and the intent is that these collective
+        instructions can be modified as needed for local site customizations.
+      base_edition: |
+        **Base Linux Edition**: this edition of the guide highlights
+        installation without the use of a companion configuration management system and
+        directly uses distro-provided package management tools for component
+        selection. The steps that follow also highlight specific changes to system
+        configuration files that are required as part of the cluster install
+        process. 
+      audience:
+        title: Target Audience
+        paragraph1: |
+          This guide is targeted at experienced \Linux{} system administrators for HPC
+          environments. Knowledge of software package management, system networking, and
+          PXE booting is assumed. Command-line input examples are highlighted throughout
+          this guide via the following syntax:
+        paragraph2: |
+          Unless specified otherwise, the examples presented are executed with
+          elevated (root) privileges. The examples also presume use of the BASH login
+          shell, though the equivalent commands in other shells can be substituted.
+          In addition to specific command-line instructions called out in this guide, an
+          alternate convention is used to highlight potentially useful tips or optional
+          configuration options. These tips are highlighted via the following format:
+        tip1: |
+          Life is a tale told by an idiot, full of sound and fury signifying nothing. --Willy Shakes
+      requirements:
+        title: Requirements/Assumptions
+        paragraph1: |
+          This installation recipe assumes the availability of a single head node 
+          *master*, and four *compute* nodes. The *master* node serves as the
+          overall system management server (SMS) and is provisioned with {{< meta ohpc.baseOS >}} and is
+          subsequently configured to provision the remaining *compute* nodes with
+          {{< meta ohpc.provisioner >}} in a 
+          \iftoggleverb{isxCATstateful} stateful \else stateless \fi 
+          configuration. The terms *master* and SMS are
+          used interchangeably in this guide. For power management, we assume that
+          the compute node baseboard management controllers (BMCs) are available via IPMI
+          from the chosen master host. For file systems, we assume that the chosen master
+          server will host an {{< meta ohpc.NFS >}} file system that is made available to the compute
+          nodes.
+        paragraph1-x86_64: |
+          Installation information is also discussed to optionally mount a
+          parallel file system and in this case, the parallel file system is assumed to
+          exist previously.
+        paragraph2: |
+          An outline of the physical architecture discussed is shown in
+          Figure~\ref{fig:physical_arch} and highlights the high-level networking
+          configuration. The *master* host requires at least two Ethernet interfaces
+          with *eth0* connected to the local data center network and *eth1* used
+          to provision and manage the cluster backend (note that these interface names
+          are examples and may be different depending on local settings and OS
+          conventions). Two logical IP interfaces are expected to each compute node: the
+          first is the standard Ethernet interface that will be used for provisioning and
+          resource management. The second is used to connect to each host's BMC and is
+          used for power management and remote console access. Physical connectivity for
+          these two logical IP networks is often accommodated via separate cabling and
+          switching infrastructure; however, an alternate configuration can also be
+          accommodated via the use of a shared NIC, which runs a packet filter to divert
+          management packets between the host and BMC.
+        paragraph2-x86_64: |
+          In addition to the IP networking, there is an optional high-speed network
+          ({{< meta ohpc.InfiniBand >}} or {{< meta ohpc.OmniPath >}} in this recipe) that is also connected to each of the
+          hosts. This high speed network is used for application message passing and
+          optionally for parallel file system connectivity as well (e.g. to
+          existing {{< meta ohpc.Lustre >}} or BeeGFS storage targets).
+
     level1: 
       heading: An English heading
       text: Level 1 text

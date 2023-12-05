@@ -1,0 +1,14 @@
+## {{< meta ohpc.content.introduction.audience.title >}}
+
+{{< meta ohpc.content.introduction.audience.paragraph1 >}}
+
+```bash
+[sms] echo "OpenHPC hello world"
+```
+
+{{< meta ohpc.content.introduction.audience.paragraph2 >}}
+
+::: {.callout-tip}
+{{< meta ohpc.content.introduction.audience.tip1 >}}
+:::
+

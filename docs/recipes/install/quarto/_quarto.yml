@@ -47,3 +47,7 @@ ohpc:
   upgrade: yum -y upgrade
   chrootupgrade: yum -y --installroot=\$CHROOT upgrade
   tftppkg: syslinux-tftpboot
+  InfiniBand: InfiniBand
+  OmniPath: OmniPath
+  Lustre: Lustre
+  NFS: NFS
