@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# generates _quarto-git.yml that provides the metadata for `ohpc.git.**`
+
 # newline with two spaces
 NL1="%n  "
 # newline with four spaces
