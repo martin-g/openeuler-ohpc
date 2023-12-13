@@ -31,6 +31,7 @@ format:
 # OpenHPC specific metadata that is applicable to all profiles 
 ohpc:
   openhpc: OpenHPC
+  OHPC: OpenHPC
   revision: 3.x
   version: 3.1
   # Define package manager commands

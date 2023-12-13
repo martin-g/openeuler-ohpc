@@ -7,15 +7,4 @@ toc-depth: 5
 
 {{< include content/introduction.qmd >}}
 
-# {{< meta ohpc.content.level1.heading >}}
-
-{{< meta ohpc.content.level1.text >}}
-
-## {{< meta ohpc.content.level2.heading >}} 
-
-{{< meta ohpc.content.level2.text >}}
-
-### {{< meta ohpc.content.level3.heading >}}
-
-{{< meta ohpc.content.level3.text >}}
-
+{{< include content/baseOS/BaseOperatingSystem.qmd >}}

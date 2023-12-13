@@ -6,20 +6,21 @@ ohpc:
     introduction:
       title: Introduction
       contents: |
-        This guide presents a simple cluster installation procedure using components
+        <p>This guide presents a simple cluster installation procedure using components
         from the {{< meta ohpc.openhpc >}} software stack. {{< meta ohpc.openhpc >}} 
         represents an aggregation of a number
         of common ingredients required to deploy and manage an HPC Linux* cluster
         including provisioning tools, resource management, I/O clients, development
         tools, and a variety of scientific libraries. These packages have been
         pre-built with HPC integration in mind while conforming to common \Linux{}
-        distribution standards.
-        The documentation herein is intended to
+        distribution standards.</p>
+
+        <p>The documentation herein is intended to
         be reasonably generic, but uses the underlying motivation of a small, 4-node
         \iftoggleverb{isxCATstateful} stateful \else stateless \fi 
         cluster installation to define a step-by-step process. Several
         optional customizations are included and the intent is that these collective
-        instructions can be modified as needed for local site customizations.
+        instructions can be modified as needed for local site customizations.</p>
       base_edition: |
         **Base Linux Edition**: this edition of the guide highlights
         installation without the use of a companion configuration management system and
@@ -95,16 +96,39 @@ ohpc:
           used throughout this recipe are presented below. Note that while the example definitions above correspond to a small
           4-node compute subsystem, the compute parameters are defined in array format to accommodate logical extension to larger
           node counts.
+    bos:
+      title: Install Base Operating System (BOS)
+      paragraph1: |
+        <p>In an external setting, installing the desired BOS on a
+        *master* SMS host typically involves booting from a DVD ISO image on a new
+        server. With this approach, insert the {{< meta ohpc.baseOS >}} DVD, power cycle the host, and
+        follow the distro provided directions to install the BOS on your chosen {*master*} host. 
+        Alternatively, if choosing to use a pre-installed server, please
+        verify that it is provisioned with the required {{< meta ohpc.baseOS >}} distribution.</p>
 
-    level1: 
-      heading: An English heading
-      text: Level 1 text
-    level2: 
-      heading: Level 2 heading
-      text: Level 2 text
-    level3: 
-      heading: Level 3 heading
-      text: Level 3 text
+        <p>Prior to beginning the installation process of {{< meta ohpc.OHPC >}} components, several additional
+        considerations are noted here for the SMS host configuration. First, 
+        the installation recipe herein assumes that
+        the SMS host name is resolvable locally. Depending on the manner in which you
+        installed the BOS, there may be an adequate entry already defined
+        in **/etc/hosts**. If not, the following addition can be used to identify
+        your SMS host.</p>
+      paragraph2: |
+        <p>While it is theoretically possible to enable SELinux on a cluster provisioned
+        with {{< meta ohpc.provisioner >}}, 
+        doing so is beyond the scope of this document. Even the use of
+        permissive mode can be problematic and we therefore recommend disabling SELinux on the 
+        *master* SMS host. If SELinux components are installed locally,
+        the *selinuxenabled* command can be used to determine if SELinux is
+        currently enabled. If enabled, consult the distro documentation for information
+        on how to disable.</p>
+
+        <p>Finally, provisioning services rely on DHCP, TFTP, and HTTP network protocols.
+        Depending on the local BOS configuration on the SMS host, default firewall
+        rules may prohibit these services. Consequently, this recipe assumes that the local
+        firewall running on the SMS host is disabled. If installed, the default
+        firewall service can be disabled as follows:</p>
+
   title:
     clusterBuildingRecipes: Cluster Building Recipes
     baseOsSuffix: Base OS
