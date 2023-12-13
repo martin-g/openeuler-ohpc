@@ -3,12 +3,11 @@ GITID    := $(shell git describe 2> /dev/null)
 
 #$(info $$GITID is [${GITID}])
 
-.PHONY: $(PAPER).qmd
-$(PAPER).qmd:
-	bash ./update_quarto-git.sh
-	
+_build-distro:
+	echo Going to build docs for '$(DISTRO)'
+
 	for lang in english chinese; do \
-		for distro in openeuler22_03 rocky9; do \
+		for distro in $(DISTRO); do \
 			for arch in aarch64 x86_64; do  \
 				for rms in slurm openpbs; do  \
 					for provisioner in warewulf3; do \
@@ -24,18 +23,29 @@ $(PAPER).qmd:
 		done \
 	done
 
+	echo Done building docs for '$(DISTRO)'
 
-all: $(PAPER).qmd
+openeuler: generate-git-profile 
+	$(MAKE) DISTRO=openeuler22_03 _build-distro
+
+
+rocky: generate-git-profile
+	$(MAKE) DISTRO=rocky9 _build-distro
+
+all: generate-git-profile openeuler rocky
 
 clean:
-	rm -rf _output $(PAPER)_files .quarto
+	rm -rf _output $(PAPER)_files .quarto _quarto-git.yml
 	
 	for ext in pdf html md tex aux log toc; do  \
 	 	$(RM) $(PAPER).$$ext; \
 	done
 
+generate-git-profile:
+	bash ./update_quarto-git.sh
+
 # a goal used for testing/debugging
-test:
+test: generate-git-profile
 	quarto render \
 		--profile git,english,openeuler22_03,aarch64,slurm,warewulf3 \
 		--to pdf \
