@@ -6,8 +6,8 @@ GITID    := $(shell git describe 2> /dev/null)
 _build-distro:
 	echo Going to build docs for '$(DISTRO)'
 
-	for lang in english chinese; do \
-		for distro in $(DISTRO); do \
+	for distro in $(DISTRO); do \
+		for lang in english chinese; do \
 			for arch in aarch64 x86_64; do  \
 				for rms in slurm openpbs; do  \
 					for provisioner in warewulf3; do \
@@ -15,7 +15,7 @@ _build-distro:
 							quarto render \
 								--profile git,$${lang},$${distro},$${arch},$${rms},$${provisioner} \
 								--to $${format} \
-								--output-dir _output/$${lang}/$${distro}/$${arch}/$${rms}/$${provisioner}/$${format}/ ; \
+								--output-dir _output/$${distro}/$${lang}/$${arch}/$${rms}/$${provisioner}/$${format}/ ; \
 						done \
 					done \
 				done \
@@ -26,7 +26,7 @@ _build-distro:
 	echo Done building docs for '$(DISTRO)'
 
 openeuler: generate-git-profile 
-	$(MAKE) DISTRO=openeuler22_03 _build-distro
+	$(MAKE) DISTRO=openeuler22.03 _build-distro
 
 
 rocky: generate-git-profile

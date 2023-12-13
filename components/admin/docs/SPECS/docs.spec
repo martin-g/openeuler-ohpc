@@ -72,6 +72,10 @@ BuildRequires:  texlive-collection-langchinese
 BuildRequires:  texlive-ctex
 BuildRequires:  texlive-xecjk
 BuildRequires:  texlive-fandol
+BuildRequires:  texlive-framed
+BuildRequires:  texlive-mdwtools
+BuildRequires:  texlive-multirow
+BuildRequires:  texlive-fontawesome5
 
 #BuildRequires:  texlive-texconfig
 #BuildRequires:  texlive-helvetic
@@ -200,7 +204,7 @@ make ; %{parser} steps.tex > recipe.sh ; popd
 
 %if 0%{?openEuler}
 pushd docs/recipes/install/quarto
-make
+make openeuler
 # TODO install codedown https://github.com/earldouglas/codedown
 # codedown ohpc _output/openeuler22.03/guide.md > recipe-openeuler22.03.sh 
 # codedown ohpc _output/rocky9/guide.md > recipe-rocky9.sh 
@@ -263,28 +267,33 @@ install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHP
 %endif
 
 %if 0%{?openEuler}
-%define out_path openeuler22.03/english/aarch64
+ls -laR docs/recipes/install/quarto/
+%define out_path openeuler22.03/english/aarch64/slurm/warewulf3
 %define lpath quarto/_output/%{out_path}
-install -m 0644 -p -D docs/recipes/install/%{lpath}/guide.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.pdf
-install -m 0644 -p -D docs/recipes/install/%{lpath}/guide.md %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.md
+install -m 0644 -p -D docs/recipes/install/%{lpath}/pdf/guide.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.pdf
+install -m 0644 -p -D docs/recipes/install/%{lpath}/md/guide.md %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.md
+install -m 0644 -p -D docs/recipes/install/%{lpath}/md/figures/* %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/figures/*
 #install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
 
-%define out_path openeuler22.03/english/x86_64
+%define out_path openeuler22.03/english/x86_64/slurm/warewulf3
 %define lpath quarto/_output/%{out_path}
-install -m 0644 -p -D docs/recipes/install/%{lpath}/guide.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.pdf
-install -m 0644 -p -D docs/recipes/install/%{lpath}/guide.md %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.md
+install -m 0644 -p -D docs/recipes/install/%{lpath}/pdf/guide.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.pdf
+install -m 0644 -p -D docs/recipes/install/%{lpath}/md/guide.md %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.md
+install -m 0644 -p -D docs/recipes/install/%{lpath}/md/figures/* %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/figures/*
 #install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
 
-%define out_path openeuler22.03/chinese/aarch64
+%define out_path openeuler22.03/chinese/aarch64/slurm/warewulf3
 %define lpath quarto/_output/%{out_path}
-install -m 0644 -p -D docs/recipes/install/%{lpath}/guide.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.pdf
-install -m 0644 -p -D docs/recipes/install/%{lpath}/guide.md %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.md
+install -m 0644 -p -D docs/recipes/install/%{lpath}/pdf/guide.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.pdf
+install -m 0644 -p -D docs/recipes/install/%{lpath}/md/guide.md %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.md
+install -m 0644 -p -D docs/recipes/install/%{lpath}/md/figures/* %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/figures/*
 #install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
 
-%define out_path openeuler22.03/chinese/x86_64
+%define out_path openeuler22.03/chinese/x86_64/slurm/warewulf3
 %define lpath quarto/_output/%{out_path}
-install -m 0644 -p -D docs/recipes/install/%{lpath}/guide.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.pdf
-install -m 0644 -p -D docs/recipes/install/%{lpath}/guide.md %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.md
+install -m 0644 -p -D docs/recipes/install/%{lpath}/pdf/guide.pdf %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.pdf
+install -m 0644 -p -D docs/recipes/install/%{lpath}/md/guide.md %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/Install_guide.md
+install -m 0644 -p -D docs/recipes/install/%{lpath}/md/figures/* %{buildroot}/%{OHPC_PUB}/doc/recipes/%{out_path}/figures/*
 #install -m 0755 -p -D docs/recipes/install/%{lpath}/recipe.sh %{buildroot}/%{OHPC_PUB}/doc/recipes/%{lpath}/recipe.sh
 
 
