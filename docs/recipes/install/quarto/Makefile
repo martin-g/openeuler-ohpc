@@ -45,9 +45,16 @@ generate-git-profile:
 	bash ./update_quarto-git.sh
 
 # a goal used for testing/debugging
-test: generate-git-profile
+test-en: generate-git-profile
 	quarto render \
 		--profile git,english,openeuler22_03,aarch64,slurm,warewulf3 \
 		--to pdf \
-		--output-dir . ; \
-		open $(PAPER).pdf;
+		--output $(PAPER)_en.pdf ; \
+		open $(PAPER)_en.pdf;
+
+test-zh: generate-git-profile
+	quarto render \
+		--profile git,chinese,openeuler22_03,aarch64,slurm,warewulf3 \
+		--to pdf \
+		--output $(PAPER)_zh.pdf ; \
+		open $(PAPER)_zh.pdf;
