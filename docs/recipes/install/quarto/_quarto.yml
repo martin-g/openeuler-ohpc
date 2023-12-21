@@ -1,0 +1,54 @@
+# Global Quarto configuration
+# https://quarto.org/docs/projects/quarto-projects.html#project-metadata
+# https://quarto.org/docs/reference/projects/options.html
+
+project:
+  render:
+    - guide.qmd
+
+format:
+  pdf:
+    documentclass: article
+    papersize: letter
+    number-sections: true
+    toc-depth: 5
+    toc-title: Contents
+    toccolor: blue
+    number-depth: 5
+    code-fold: true
+    colorlinks: true
+    linkcolor: blue
+    urlcolor: blue
+    template-partials:
+      - partials/before-body.tex
+    header-includes:
+      - \usepackage{./common/ohpc-doc}
+    keep-tex: true
+  html:
+    title-block-banner: true
+
+
+# OpenHPC specific metadata that is applicable to all profiles 
+ohpc:
+  openhpc: OpenHPC
+  OHPC: OpenHPC
+  revision: 3.x
+  version: 3.1
+  # Define package manager commands
+  pkgmgr: yum
+  addrepo: wget -P /etc/yum.repos.d
+  chrootaddrepo: wget -P \$CHROOT/etc/yum.repos.d
+  clean: yum clean expire-cache
+  chrootclean: yum --installroot=\$CHROOT clean expire-cache
+  install: yum -y install
+  chrootinstall: yum -y --installroot=\$CHROOT install
+  groupinstall: yum -y groupinstall
+  groupchrootinstall: yum -y --installroot=\$CHROOT groupinstall
+  remove: yum -y remove
+  upgrade: yum -y upgrade
+  chrootupgrade: yum -y --installroot=\$CHROOT upgrade
+  tftppkg: syslinux-tftpboot
+  InfiniBand: InfiniBand
+  OmniPath: OmniPath
+  Lustre: Lustre
+  NFS: NFS

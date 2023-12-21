@@ -1,0 +1,10 @@
+title: "OpenHPC documentation for Rocky 9"
+
+ohpc:
+  openhpc: OpenHPC on Rocky 9
+  baseOS: Rocky 9
+  OSRepo: rocky9
+  OSTree: rocky9
+  OSTag: el9
+  baseos: rocky9
+  baseosshort: rocky

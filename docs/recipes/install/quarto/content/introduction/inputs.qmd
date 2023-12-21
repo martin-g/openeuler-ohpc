@@ -1,0 +1,82 @@
+## {{< meta ohpc.content.introduction.inputs.title >}}
+
+{{< meta ohpc.content.introduction.inputs.paragraph1 >}}
+
+::: {.content-visible when-profile="warewulf3"}
+|        Variable    |      Meaning     |
+|--------------------|------------------|
+| $\{sms\_name\}     | \# Hostname for SMS server |
+| $\{sms\_ip\}       | \# Internal IP address on SMS server |
+| $\{sms\_eth\_internal\} | \# Internal Ethernet interface on SMS |
+| $\{eth\_provision\} | \# Provisioning interface for computes |
+| \$\{internal\_netmask\} | \# Subnet netmask for internal network |
+| \$\{ntp\_server\} | \# Local ntp server for time synchronization |
+| \$\{bmc\_username\} | \# BMC username for use by IPMI |
+| \$\{bmc\_password\} | \# BMC password for use by IPMI |
+| \$\{num\_computes\} | \# Total \# of desired compute nodes |
+| \$\{c\_ip[0]\}, \$\{c\_ip[1]\}, ... | \# Desired compute node addresses |
+| \$\{c\_bmc[0]\}, \$\{c\_bmc[1]\}, ... | \# BMC addresses for computes |
+| \$\{c\_mac[0]\}, \$\{c\_mac[1]\}, ... | \# MAC addresses for computes |
+| \$\{c\_name[0]\}, \$\{c\_name[1]\}, ... | \# Host names for computes |
+| \$\{compute\_regex\} | \# Regex matching all compute node names (e.g. *c\**) |
+| \$\{compute\_prefix\} | \# Prefix for compute node names (e.g. *c*) |
+:::
+
+::: {.content-visible unless-profile="warewulf3"}
+|        Variable    |      Meaning     |
+|--------------------|------------------|
+| $\{sms\_name\}     | \# Hostname for SMS server |
+| $\{sms\_ip\}       | \# Internal IP address on SMS server |
+| $\{sms\_eth\_internal\} | \# Internal Ethernet interface on SMS |
+| $\{eth\_provision\} | \# Provisioning interface for computes |
+| \$\{internal\_netmask\} | \# Subnet netmask for internal network |
+| \$\{ntp\_server\} | \# Local ntp server for time synchronization |
+| \$\{bmc\_username\} | \# BMC username for use by IPMI |
+| \$\{bmc\_password\} | \# BMC password for use by IPMI |
+| \$\{num\_computes\} | \# Total \# of desired compute nodes |
+| \$\{c\_ip[0]\}, \$\{c\_ip[1]\}, ... | \# Desired compute node addresses |
+| \$\{c\_bmc[0]\}, \$\{c\_bmc[1]\}, ... | \# BMC addresses for computes |
+| \$\{c\_mac[0]\}, \$\{c\_mac[1]\}, ... | \# MAC addresses for computes |
+| \$\{c\_name[0]\}, \$\{c\_name[1]\}, ... | \# Host names for computes |
+| \$\{compute\_regex\} | \# Regex matching all compute node names (e.g. *c\**) |
+| \$\{compute\_prefix\} | \# Prefix for compute node names (e.g. *c*) |
+:::
+
+Optional:
+
+::: {.content-visible when-profile="x86_64"}
+::: {.content-visible when-profile="warewulf3"}
+|        Variable    |      Meaning     |
+|--------------------|------------------|
+| \$\{sysmgmtd\_host\} | \# BeeGFS System Management host name |
+| \$\{mgs\_fs\_name\} | \# Lustre MGS mount name |
+| \$\{sms\_ipoib\} | \# IPoIB address for SMS server |
+| \$\{ipoib\_netmask\} | \# Subnet netmask for internal IPoIB |
+| \$\{c\_ipoib[0]\}, \$\{c\_ipoib[1]\}, ... | \# IPoIB addresses for computes |
+| \$\{kargs\} | \# Kernel boot arguments |
+:::
+:::
+
+::: {.content-visible when-profile="x86_64"}
+::: {.content-visible unless-profile="warewulf3"}
+|        Variable    |      Meaning     |
+|--------------------|------------------|
+| \$\{sysmgmtd\_host\} | \# BeeGFS System Management host name |
+| \$\{mgs\_fs\_name\} | \# Lustre MGS mount name |
+| \$\{sms\_ipoib\} | \# IPoIB address for SMS server |
+| \$\{ipoib\_netmask\} | \# Subnet netmask for internal IPoIB |
+| \$\{c\_ipoib[0]\}, \$\{c\_ipoib[1]\}, ... | \# IPoIB addresses for computes |
+:::
+:::
+
+::: {.content-visible when-profile="aarch64"}
+::: {.content-visible when-profile="warewulf3"}
+|        Variable    |      Meaning     |
+|--------------------|------------------|
+| \$\{kargs\} | \# Kernel boot arguments |
+:::
+:::
+
+<!--
+TODO: mgrigorov Either render several tables for the conditions or render the table with Python (https://github.com/quarto-dev/quarto-cli/discussions/7795)!
+-->

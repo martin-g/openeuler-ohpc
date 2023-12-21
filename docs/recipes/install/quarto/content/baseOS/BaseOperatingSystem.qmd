@@ -1,0 +1,14 @@
+# {{< meta ohpc.content.bos.title >}}
+
+{{< meta ohpc.content.bos.paragraph1 >}}
+
+```bash
+[sms]# echo ${sms_ip} ${sms_name} >> /etc/hosts
+```
+
+{{< meta ohpc.content.bos.paragraph2 >}}
+
+```bash
+[sms]# systemctl disable firewalld
+[sms]# systemctl stop firewalld
+```
