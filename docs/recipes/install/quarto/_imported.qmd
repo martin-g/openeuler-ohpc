@@ -1,8 +1,0 @@
-## Imported
-
-This is included [includes](https://quarto.org/docs/authoring/includes.html)
-
-Using variables [variables](https://quarto.org/docs/authoring/variables.html):
-
-Simple:
-{{< meta ohpc.openhpc >}}
